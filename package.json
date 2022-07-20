@@ -1,0 +1,28 @@
+{
+  "name": "shrink-path",
+  "version": "0.1.0",
+  "description": "Utility to shrink file paths to a given length.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lionel87/shrink-path.git"
+  },
+  "keywords": [
+    "shorten",
+    "path",
+    "shrink",
+    "path",
+    "shorten",
+    "filename"
+  ],
+  "author": "László Bulik <laszlo.bulik@ksh.hu> (http://www.ksh.hu/)",
+  "license": "MIT",
+  "types": "./index.d.ts",
+  "bugs": {
+    "url": "https://github.com/lionel87/shrink-path/issues"
+  },
+  "homepage": "https://github.com/lionel87/shrink-path#readme"
+}
