@@ -15,11 +15,18 @@ The algorithm:
 
 ## Docs
 
-`shrinkPath(path: string, maxLength: number; minSemgmentLength: number = maxLength / 3, ellipsis: string = '…'): string;`
+```js
+shrinkPath(
+  path: string,
+  maxLength: number,
+  minSemgmentLength: number = maxLength / 3,
+  ellipsis: string = '…'
+): string;
+```
 
 - The result will always be shorter or equal length to `maxLength`.
 - By default `…` is used to mark shrinked parts of the path, configurable by the `ellipis` argument.
-- Path segments shrinking can be configured by `minSegmentLength`. Defaults to `maxLength / 3`. Set to `Infinity` to disable segment shrinking.
+- Path segments shrinking can be configured by `minSegmentLength`, this value sets the minimum length a path segment must have. Defaults to `maxLength / 3`. Set to `Infinity` to disable segment shrinking.
 - The algorithm will try to expand shrinked segments to produce result with equal length to `maxLength`.
 - Windows paths are always normalized to Unix style.
 
