@@ -33,7 +33,7 @@ const shrinkPath = (path, maxLength, minSemgmentLength = maxLength / 3, ellipsis
 	// test if path is good enough with segment shrinking
 	if (Number.isFinite(minSemgmentLength)) {
 		minSemgmentLength = Math.floor(minSemgmentLength);
-		const shrinkedLength = (minSL) => segments.reduce((acc, curr) => acc + Math.min(curr.length, minSL), segments.length - 1);
+		const shrinkedLength = (minSL) => segments.reduce((acc, curr) => acc + Math.min(curr.length, minSL), Math.max(0, segments.length - 1));
 
 		do {
 			const minShrinkedLength = shrinkedLength(minSemgmentLength);
@@ -52,17 +52,21 @@ const shrinkPath = (path, maxLength, minSemgmentLength = maxLength / 3, ellipsis
 					}
 				} while (min < max);
 
-				// we still may have some empty space to reach maxLength
-				// try to increment each segment incrementally
+				// collect segment positions which can be shrinked
 				const positions = [];
 				for (const [i, segment] of segments.entries()) {
 					if (segment.length > min) {
 						positions.push({ index: i, size: min });
 					}
 				}
-				const underflow = maxLength - shrinkedLength(min);
-				for (let i = 0; i < underflow; i++) {
-					positions[i].size++;
+
+				// we still may have some empty space to reach maxLength
+				// try to increment each segment incrementally
+				if (positions.length > 0) {
+					const underflow = maxLength - shrinkedLength(min);
+					for (let i = 0; i < underflow; i++) {
+						positions[i % positions.length].size++;
+					}
 				}
 
 				// resize segments
