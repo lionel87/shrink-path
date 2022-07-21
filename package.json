@@ -1,6 +1,6 @@
 {
   "name": "shrink-path",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Utility to shrink file paths to a given length.",
   "main": "index.js",
   "scripts": {
