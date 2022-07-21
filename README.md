@@ -30,4 +30,10 @@ const shrinkPath = require('shrink-path');
 
 shrinkPath('c:\\Windows\\System32\\WindowsPowerShell\\v1.0\\Modules\\TroubleshootingPack\\en-US\\Microsoft.Windows.Diagnosis.TroubleshootingPack.dll-Help.xml', 60);
 // c:/Windows/…/TroubleshootingPack/en-US/Microsoft.…l-Help.xml
+
+shrinkPath('c:\\Windows\\System32\\WindowsPowerShell\\v1.0\\Modules\\TroubleshootingPack\\en-US\\Microsoft.Windows.Diagnosis.TroubleshootingPack.dll-Help.xml', 60, 0);
+// c:/Windows/Sys…m32/Win…ell/v1.0/Modules/Tro…ack/en-US/Mic…ml
+
+shrinkPath('c:\\Windows\\System32\\WindowsPowerShell\\v1.0\\Modules\\TroubleshootingPack\\en-US\\Microsoft.Windows.Diagnosis.TroubleshootingPack.dll-Help.xml', 60, Infinity);
+// …/Microsoft.Windows.Diagnosis.TroubleshootingPack.dll-Help.…
 ```
