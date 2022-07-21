@@ -1,3 +1,9 @@
-declare function shrinkPath(path: string, maxLength: number, softSegmentLength: number = maxLength / 3, ellipsis: string = '…'): string;
+declare function shrinkPath(
+	path: string,
+	maxLength: number,
+	minSegmentLength: number = maxLength / 3,
+	ellipsisPlacement: 'middle' | 'end' = 'middle',
+	ellipsis: string = '…'
+): string;
 
 export = shrinkPath;
