@@ -18,7 +18,7 @@ const shrinkSegment = (segment, length, ellipsis) => {
  */
 const shrinkPath = (path, maxLength, minSemgmentLength = maxLength / 3, ellipsis = '…') => {
 	if (path.length <= maxLength) {
-		return path;
+		return path.replace(/\\/g, '/');
 	}
 
 	const segments = path.split(/\/|\\/);
