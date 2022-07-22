@@ -3,8 +3,9 @@
   "version": "0.3.0",
   "description": "Utility to shrink file paths to a given length.",
   "type": "module",
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "esm/index.d.ts",
   "exports": {
     ".": {
       "require": "./cjs/index.js",
@@ -35,7 +36,6 @@
   ],
   "author": "László Bulik <laszlo.bulik@ksh.hu> (http://www.ksh.hu/)",
   "license": "MIT",
-  "types": "./index.d.ts",
   "bugs": {
     "url": "https://github.com/lionel87/shrink-path/issues"
   },
