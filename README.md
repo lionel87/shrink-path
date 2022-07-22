@@ -35,7 +35,11 @@ shrinkPath(
 ## Usage
 
 ```js
-const shrinkPath = require('shrink-path');
+const { shrinkPath } = require('shrink-path');
+// or
+import { shrinkPath } from 'shrink-path';
+// or
+import shrinkPath from 'shrink-path';
 
 const filePath = 'c:\\Windows\\System32\\WindowsPowerShell\\v1.0\\Modules\\TroubleshootingPack\\en-US\\Microsoft.Windows.Diagnosis.TroubleshootingPack.dll-Help.xml';
 

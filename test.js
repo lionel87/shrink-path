@@ -1,4 +1,4 @@
-const shrinkPath = require('./index.js');
+import { shrinkPath } from './esm/index.js';
 
 const tests = [{
 	length: 60,

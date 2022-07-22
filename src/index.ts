@@ -1,22 +1,26 @@
 /**
- * @param {string} segment
+ * Shrink a string omitting the middle part.
+ *
+ * @param {string} text
  * @param {number} length
  * @param {string} ellipsis
  */
-const shrinkSegmentMiddle = (segment, length, ellipsis) => {
-	if (segment.length <= length) return segment;
+const shrinkMiddle = (text: string, length: number, ellipsis: string) => {
+	if (text.length <= length) return text;
 	const keep_2 = Math.ceil((length - ellipsis.length) / 2);
-	return segment.substring(0, keep_2) + ellipsis + segment.substring(keep_2 + segment.length - length + ellipsis.length);
+	return text.substring(0, keep_2) + ellipsis + text.substring(keep_2 + text.length - length + ellipsis.length);
 };
 
 /**
- * @param {string} segment
+ * Shrink a string omitting the end part.
+ *
+ * @param {string} text
  * @param {number} length
  * @param {string} ellipsis
  */
-const shrinkSegmentEnd = (segment, length, ellipsis) => {
-	if (segment.length <= length) return segment;
-	return segment.substring(0, length - ellipsis.length) + ellipsis;
+const shrinkEnd = (text: string, length: number, ellipsis: string) => {
+	if (text.length <= length) return text;
+	return text.substring(0, length - ellipsis.length) + ellipsis;
 };
 
 /**
@@ -27,7 +31,13 @@ const shrinkSegmentEnd = (segment, length, ellipsis) => {
  * @param {string} ellipsis Replacement string to mark shrinked parts of the path.
  * @returns {string} Shrinked path.
  */
-const shrinkPath = (path, maxLength, minSegmentLength = maxLength / 3, ellipsisPlacement = 'middle', ellipsis = '…') => {
+export const shrinkPath = (
+	path: string,
+	maxLength: number,
+	minSegmentLength: number = maxLength / 3,
+	ellipsisPlacement: 'middle' | 'end' = 'middle',
+	ellipsis: string = '…'
+) => {
 	if (path.length <= maxLength) {
 		return path.replace(/\\/g, '/');
 	}
@@ -44,7 +54,7 @@ const shrinkPath = (path, maxLength, minSegmentLength = maxLength / 3, ellipsisP
 	// test if path is good enough with segment shrinking
 	if (Number.isFinite(minSegmentLength)) {
 		minSegmentLength = Math.floor(minSegmentLength);
-		const shrinkedLength = (minSL) => segments.reduce((acc, curr) => acc + Math.min(curr.length, minSL), Math.max(0, segments.length - 1));
+		const shrinkedLength = (minSL: number) => segments.reduce((acc, curr) => acc + Math.min(curr.length, minSL), segments.length - 1);
 
 		do {
 			const minShrinkedLength = shrinkedLength(minSegmentLength);
@@ -81,9 +91,9 @@ const shrinkPath = (path, maxLength, minSegmentLength = maxLength / 3, ellipsisP
 				}
 
 				// resize segments
-				const shrinkSegment = ellipsisPlacement === 'end' ? shrinkSegmentEnd : shrinkSegmentMiddle;
+				const shrink = ellipsisPlacement === 'end' ? shrinkEnd : shrinkMiddle;
 				for (const pos of positions) {
-					segments[pos.index] = shrinkSegment(segments[pos.index], pos.size, ellipsis);
+					segments[pos.index] = shrink(segments[pos.index], pos.size, ellipsis);
 				}
 
 				return segments.join('/');
@@ -101,13 +111,7 @@ const shrinkPath = (path, maxLength, minSegmentLength = maxLength / 3, ellipsisP
 		}
 	}
 
-	const result = segments.join('/');
-
-	if (result.length > maxLength) {
-		return result.substring(0, maxLength - ellipsis.length) + ellipsis;
-	}
-
-	return result;
+	return shrinkEnd(segments.join('/'), maxLength, ellipsis);
 };
 
-module.exports = shrinkPath;
+export default shrinkPath;
